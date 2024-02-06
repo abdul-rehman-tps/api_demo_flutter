@@ -1,4 +1,4 @@
-import 'package:api_demo/repository/auth/auth_repository.dart';
+import 'package:api_demo/repository/auth_repository.dart';
 import 'package:api_demo/ui/screen/main/todo_list/todo_list_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';

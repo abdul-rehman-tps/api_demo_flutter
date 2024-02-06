@@ -16,6 +16,9 @@ class App extends StatelessWidget {
         ),
         useMaterial3: true,
         textTheme: const TextTheme(bodyMedium: TextStyle(color: Colors.white)),
+        progressIndicatorTheme: const ProgressIndicatorThemeData(
+          color: Colors.white,
+        ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ButtonStyle(
             backgroundColor: MaterialStatePropertyAll<Color>(
