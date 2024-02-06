@@ -4,8 +4,8 @@ import 'package:api_demo/ui/widget/custom_input_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class LoginView extends StatelessWidget {
-  const LoginView({super.key});
+class TodoListView extends StatelessWidget {
+  const TodoListView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -49,14 +49,10 @@ class LoginView extends StatelessWidget {
                     children: [
                       Image.asset('assets/images/logo_saib.png', width: 400),
                       const SizedBox(height: 16),
-                      CustomInputField(
-                        label: 'User Name',
-                        controller: c.emailController,
-                      ),
+                      const CustomInputField(label: 'User Name'),
                       const SizedBox(height: 8),
-                      CustomInputField(
+                      const CustomInputField(
                         label: 'Password',
-                        controller: c.passwordController,
                         supportObscure: true,
                       ),
                       const SizedBox(height: 8),
@@ -78,7 +74,7 @@ class LoginView extends StatelessWidget {
                       const SizedBox(height: 8),
                       CustomButton(
                         actionText: 'Login',
-                        onTap: () async => await c.onLoginTap(),
+                        onTap: () async => c.onLoginTap(),
                       ),
                       const SizedBox(height: 8),
                       TextButton(

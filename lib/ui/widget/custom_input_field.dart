@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 
 class CustomInputField extends StatefulWidget {
+  final TextEditingController? controller;
   final String label;
-
   final bool supportObscure;
 
   const CustomInputField({
     super.key,
     required this.label,
+    this.controller,
     this.supportObscure = false,
   });
 
@@ -27,6 +28,7 @@ class _CustomInputFieldState extends State<CustomInputField> {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      controller: widget.controller,
       onTapOutside: (_) => FocusManager.instance.primaryFocus?.unfocus(),
       decoration: InputDecoration(
         labelText: widget.label,
