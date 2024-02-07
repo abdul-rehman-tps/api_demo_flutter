@@ -37,6 +37,6 @@ class LoginController extends GetxController {
       password: passwordController.text,
     );
 
-    if (loggedIn) Get.off(const TodoListView());
+    if (loggedIn) Get.off(const TodoListView(), transition: Transition.fadeIn);
   }
 }
