@@ -26,4 +26,15 @@ class TodoListController extends GetxController {
     }
     isLoading.value = false;
   }
+
+  Future<bool> onDismissedLeft(int index) async {
+    RepositoryResponse<List<Todo>> response = await _todoRepository.getTodos();
+    if (response.isSuccess) {
+      todos.removeAt(index);
+      Get.snackbar('Deleted', response.message);
+    } else {
+      error.value = response.message;
+    }
+    return response.isSuccess;
+  }
 }

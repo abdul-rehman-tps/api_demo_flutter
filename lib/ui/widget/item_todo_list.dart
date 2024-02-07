@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 
 class ItemTodoList extends StatefulWidget {
   final Todo todo;
+  final Future<bool> Function()? onDismissedLeft;
 
-  const ItemTodoList({super.key, required this.todo});
+  const ItemTodoList({super.key, required this.todo, this.onDismissedLeft});
 
   @override
   State<ItemTodoList> createState() => _ItemTodoListState();
@@ -13,10 +14,15 @@ class ItemTodoList extends StatefulWidget {
 class _ItemTodoListState extends State<ItemTodoList> {
   @override
   Widget build(BuildContext context) {
-    return CheckboxListTile(
-      value: widget.todo.completed,
-      title: Text(widget.todo.title ?? 'N/A'),
-      onChanged: (value) => setState(() => widget.todo.completed = value),
+    return Dismissible(
+      key: Key(widget.todo.id.toString()),
+      confirmDismiss: (_) async => await widget.onDismissedLeft?.call(),
+      direction: DismissDirection.endToStart,
+      child: CheckboxListTile(
+        value: widget.todo.completed,
+        title: Text(widget.todo.title ?? 'N/A'),
+        onChanged: (value) => setState(() => widget.todo.completed = value),
+      ),
     );
   }
 }

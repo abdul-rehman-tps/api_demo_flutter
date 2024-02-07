@@ -36,8 +36,11 @@ class TodoListView extends StatelessWidget {
                         ? Center(child: Text(c.error.value!))
                         : ListView.separated(
                             itemCount: c.todos.length,
-                            itemBuilder: (_, int index) =>
-                                ItemTodoList(todo: c.todos[index]),
+                            itemBuilder: (_, int index) => ItemTodoList(
+                              todo: c.todos[index],
+                              onDismissedLeft: () async =>
+                                  await c.onDismissedLeft(index),
+                            ),
                             separatorBuilder: (_, int index) => const Divider(),
                           ),
               ),
