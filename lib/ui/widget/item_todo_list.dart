@@ -16,9 +16,7 @@ class _ItemTodoListState extends State<ItemTodoList> {
     return CheckboxListTile(
       value: widget.todo.completed,
       title: Text(widget.todo.title ?? 'N/A'),
-      onChanged: (value) {
-        widget.todo.completed = value;
-      },
+      onChanged: (value) => setState(() => widget.todo.completed = value),
     );
   }
 }

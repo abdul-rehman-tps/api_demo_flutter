@@ -1,3 +1,4 @@
+import 'package:api_demo/model/base/repository_response.dart';
 import 'package:api_demo/model/todo.dart';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart' as getx;
@@ -7,14 +8,16 @@ class TodoRepository {
   final Dio _dio = getx.Get.find();
   final Logger _logger = getx.Get.find();
 
-  Future<List<Todo>?> getTodos() async {
+  Future<RepositoryResponse<List<Todo>>> getTodos() async {
     try {
-      Response<List<Map<String, dynamic>>> response =
-          await _dio.get<List<Map<String, dynamic>>>('/todos');
+      Response<List<dynamic>> response =
+          await _dio.get<List<dynamic>>('/todos');
       if (response.statusCode == 200) {
-        return response.data?.map((e) => Todo.fromJson(e)).toList();
+        List<Todo> todos =
+            response.data?.map((e) => Todo.fromJson(e)).toList() ?? [];
+        return RepositoryResponse<List<Todo>>(data: todos);
       } else {
-        return null;
+        return RepositoryResponse<List<Todo>>.failed();
       }
     } on DioException catch (e) {
       if (e.response != null) {
@@ -24,7 +27,9 @@ class TodoRepository {
       } else {
         _logger.e('message: ${e.requestOptions}');
       }
+      return RepositoryResponse<List<Todo>>.failed(
+        message: e.message ?? 'Something went wrong.',
+      );
     }
-    return null;
   }
 }

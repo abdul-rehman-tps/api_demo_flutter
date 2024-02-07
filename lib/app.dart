@@ -19,6 +19,7 @@ class App extends StatelessWidget {
         progressIndicatorTheme: const ProgressIndicatorThemeData(
           color: Colors.white,
         ),
+        dividerTheme: const DividerThemeData(color: Colors.yellow),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ButtonStyle(
             backgroundColor: MaterialStatePropertyAll<Color>(

@@ -1,4 +1,5 @@
-import 'package:api_demo/ui/screen/auth/login/login_controller.dart';
+import 'package:api_demo/ui/screen/main/todo_list/todo_list_controller.dart';
+import 'package:api_demo/ui/widget/item_todo_list.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -7,7 +8,7 @@ class TodoListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final LoginController c = Get.put(LoginController());
+    final TodoListController c = Get.put(TodoListController());
 
     return Scaffold(
       body: Container(
@@ -29,8 +30,17 @@ class TodoListView extends StatelessWidget {
                 ),
               ),
               Obx(
-                () => const Center(child: CircularProgressIndicator()),
-              )
+                () => c.isLoading.value
+                    ? const Center(child: CircularProgressIndicator())
+                    : c.error.value != null
+                        ? Center(child: Text(c.error.value!))
+                        : ListView.separated(
+                            itemCount: c.todos.length,
+                            itemBuilder: (_, int index) =>
+                                ItemTodoList(todo: c.todos[index]),
+                            separatorBuilder: (_, int index) => const Divider(),
+                          ),
+              ),
             ],
           ),
         ),

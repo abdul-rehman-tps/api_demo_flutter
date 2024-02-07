@@ -1,3 +1,4 @@
+import 'package:api_demo/model/base/repository_response.dart';
 import 'package:api_demo/model/todo.dart';
 import 'package:api_demo/repository/todo_repository.dart';
 import 'package:get/get.dart';
@@ -17,7 +18,12 @@ class TodoListController extends GetxController {
 
   Future<void> getTodo() async {
     isLoading.value = true;
-    todos.value = await _todoRepository.getTodos() ?? [];
+    RepositoryResponse<List<Todo>> response = await _todoRepository.getTodos();
+    if (response.isSuccess) {
+      todos.value = response.data!;
+    } else {
+      error.value = response.message;
+    }
     isLoading.value = false;
   }
 }
